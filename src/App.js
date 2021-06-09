@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+
 import './App.css';
+import axios from "axios";
 
 function App() {
+
+    const API_KEY = process.env.REACT_APP_API_KEY;
+    const base_url = 'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth';
+    var queryParams = `?serviceKey=${API_KEY}` +
+        '&returnType=json' +
+        '&numOfRows=10' +
+        '&pageNo=1' +
+        '&stationName=서울역' +
+        '&dataTerm=MONTH' +
+        '&ver=1.3';
+
+    axios.get(base_url+queryParams).then((res) => {
+        const data = res.data.list[0];
+        console.log(data);
+    });
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        {base_url}{queryParams}
     </div>
   );
 }
