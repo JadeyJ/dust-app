@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="App">
-        {base_url}{queryParams}
+        
     </div>
   );
 }
